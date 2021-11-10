@@ -1,26 +1,30 @@
 package net.ausiasmarch.blogBusterSB;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="post")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-public class PostEntity implements Serializable{
-    
+@Table(name = "post")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class PostEntity implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "titulo")
     private String titulo;
+    @Column(name = "cuerpo")
     private String cuerpo;
     private String etiquetas;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm")
     private LocalDateTime fecha;
     private Boolean visible;
 
@@ -78,9 +82,5 @@ public class PostEntity implements Serializable{
     public void setVisible(Boolean visible) {
         this.visible = visible;
     }
-    
-    
-    
-    
-    
+
 }
